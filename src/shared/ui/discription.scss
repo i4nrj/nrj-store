@@ -1,0 +1,245 @@
+HTML SCSSResult Skip Results Iframe EDIT ON * {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0 auto;
+  height: 100%;
+}
+
+body {
+  font-family: monospace;
+  justify-content: center;
+  background-color: darken(#2f3a50, 4%);
+}
+
+//! SCROLL 
+
+.scrollTop {
+  position: fixed; 
+  width: 100%;
+  bottom: 100px;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+  animation: fadeIn 0.3s;
+  transition: opacity 0.4s;
+  opacity: 0.5;
+  align-self: self-end;
+  color: inherit !important;
+  transform: rotate(90deg);
+  margin-left: 20px;
+  border-radius: 60px;
+  background-color: #15182385;
+}
+
+.scrollTop:hover{
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+//! HEADER
+
+.top-button {
+  border: 1px solid #252b37 !important;
+  padding: 5px !important;
+  margin: 10px !important;
+  color: inherit !important;
+  -webkit-transition: none !important;
+  transition: none !important;
+  text-transform: none !important;
+  font-family: "Brush Script MT", cursive !important;
+}
+
+.top-button:hover {
+  border: 1px solid !important;
+}
+
+.top-div-buttons {
+  height: 100%;
+  line-height: 60px;
+  text-align: right;
+  display: flex;
+}
+
+.top-div-logo {
+  height: 100%;
+  line-height: 60px;
+  text-align: left;
+
+  display: flex;
+}
+
+.logo-button {
+  padding: 5px !important;
+  margin: 5px !important;
+  font-family: "Brush Script MT", cursive !important;
+  font-size: 20px !important;
+  user-select: none !important;
+  text-transform: none !important;
+  color: inherit !important;
+  -webkit-transition: none !important;
+  transition: none !important;
+}
+
+.logo-button:hover {
+  border: 1px solid !important;
+}
+
+.top-div-search {
+  height: 100%;
+}
+
+.input-search {
+  width: 50vw;
+}
+
+.input-search div {
+  height: 37px !important;
+  padding: 5px !important;
+  margin: 10px !important;
+  color: inherit !important;
+  text-transform: none !important;
+  font-family: "Brush Script MT", cursive !important;
+}
+
+.input-search fieldset {
+  border-color: #252b37 !important;
+}
+
+.input-search:hover fieldset {
+  border-color: inherit !important;
+}
+
+@mixin backlight($x, $y, $spread, $size, $colorA, $colorB, $duration) {
+  &:after {
+    position: absolute;
+    content: "";
+    top: $y;
+    left: $x;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    transform: scale($size);
+    -webkit-filter: blur($spread);
+    -moz-filter: blur($spread);
+    -ms-filter: blur($spread);
+    filter: blur($spread);
+    background: linear-gradient(270deg, $colorA, $colorB);
+    background-size: 200% 200%;
+    animation: animateGlow $duration ease infinite;
+
+    @keyframes animateGlow {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  }
+}
+
+.top-container {
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: inline-flex;
+  justify-content: space-around;
+  width: 100%;
+  color: #252b37;
+  background-color: #151823;
+  animation: textColor 10s ease infinite;
+
+  @include backlight(10px, 5px, 100px, 0.75, #0fffc1, #7e0fff, 10s);
+
+  @keyframes textColor {
+    0% {
+      color: #7e0fff;
+    }
+    50% {
+      color: #0fffc1;
+    }
+    100% {
+      color: #7e0fff;
+    }
+  }
+}
+
+//! GRID
+
+.grid-item div {
+  background-color: #151823;
+  animation: textColor 10s ease infinite;
+  font-family: "Brush Script MT", cursive !important;
+
+  @keyframes textColor {
+    0% {
+      color: #7e0fff;
+    }
+    50% {
+      color: #0fffc1;
+    }
+    100% {
+      color: #7e0fff;
+    }
+  }
+}
+
+.item{
+  box-shadow: 1px 1px 10px #746ce9 !important;
+  -webkit-box-shadow: 1px 1px 10px #544bd3 !important;
+  -moz-box-shadow: 1px 1px 10px #3328d3 !important;
+  font-family: "Brush Script MT", cursive !important;
+}
+
+.item-text {
+  font-family: "Brush Script MT", cursive !important;
+}
+
+@media screen and (max-width: 900px) {
+  .top-div-search {
+    display: none;
+  }
+}
+
+.grid-container-info {
+  // border: 1px solid #252b37 !important;
+  margin: 5px !important;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.grid-container-price {
+  margin: 5px !important;
+}
+
+.grid-button {
+  border: 1px solid #252b37 !important;
+  padding: 3px !important;
+  color: inherit !important;
+  -webkit-transition: none !important;
+  transition: none !important;
+  text-transform: none !important;
+  font-family: "Brush Script MT", cursive !important;
+}
+
+.grid-button:hover {
+  border: 1px solid !important;
+}
