@@ -76,3 +76,14 @@ export const useGetDataGrid = () => {
 
   return dataGrid;
 };
+
+export const useGetUserInfo = () => {
+  const userData = {
+    userName: 'i4.nrj',
+    login: 'example@example.com',
+    password: 'qwerty',
+    favorites: [1],
+    cart: [],
+  };
+  return userData;
+}

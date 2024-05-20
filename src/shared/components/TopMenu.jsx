@@ -1,4 +1,4 @@
-import { Button, InputAdornment, TextField } from "@mui/material";
+import { Badge, Button, InputAdornment, TextField } from "@mui/material";
 import "./../ui/discription.scss";
 import {
   ElectricBolt,
@@ -7,8 +7,12 @@ import {
   Search,
   ShoppingCart,
 } from "@mui/icons-material";
+import { useNrjStore } from "../../store";
 
 export const TopMenu = () => {
+  const favorites = useNrjStore((s) => s.favorites);
+  const purchases = useNrjStore((s) => s.purchases);
+
   return (
     <>
       <div className="top-div-logo">
@@ -33,16 +37,31 @@ export const TopMenu = () => {
       </div>
       <div className="top-div-buttons">
         <Button className="top-button">
-          <FavoriteBorder fontSize="" sx={{ paddingRight: "5px" }} />
-          Favorite
+          <Badge
+            badgeContent={favorites.length}
+            className="top-badge"
+            color="primary"
+          >
+            <FavoriteBorder sx={{ paddingRight: "5px" }} />
+            Favorite
+          </Badge>
+        </Button>
+
+        <Button className="top-button">
+          <Badge
+            badgeContent={purchases.length}
+            className="top-badge"
+            color="primary"
+          >
+            <ShoppingCart sx={{ paddingRight: "5px" }} />
+            Cart
+          </Badge>
         </Button>
         <Button className="top-button">
-          <ShoppingCart fontSize="" sx={{ paddingRight: "5px" }} />
-          Cart
-        </Button>
-        <Button className="top-button">
-          <Person fontSize="" sx={{ paddingRight: "5px" }} />
-          Login
+          <Badge>
+            <Person sx={{ paddingRight: "5px" }} />
+            Login
+          </Badge>
         </Button>
       </div>
     </>
