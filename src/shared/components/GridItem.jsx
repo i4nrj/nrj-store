@@ -8,6 +8,8 @@ import {
   styled,
 } from "@mui/material";
 import PropTypes from "prop-types";
+// import { useGetUserInfo } from "../data/useGetDataGrid";
+import { useNrjStore } from "../../store";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -26,13 +28,49 @@ const Img = styled("img")({
 });
 
 function currencyFormat(num) {
-  return '$' +num?.toFixed(2)?.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") ;
+  return "$" + num?.toFixed(2)?.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ");
 }
 
 export const GridItem = ({ item }) => {
+  // const userData = useGetUserInfo();
+  const favorites = useNrjStore((s) => s.favorites);
+  const setFavorites = useNrjStore((s) => s.setFavorites);
+  const purchases = useNrjStore((s) => s.purchases);
+  const setPurchases = useNrjStore((s) => s.setPurchases);
+
+  const isFavorite = favorites.find((i) => {
+    if (i == item.id) {
+      return true;
+    }
+  });
+
+  const isAddToCart = purchases.find((c) => {
+    if (c == item.id) {
+      return true;
+    }
+  });
+
+  const handleSetFavorite = (item) => {
+    setFavorites([...favorites, item]);
+  };
+
+  const handleRemoveFavorite = (item) => {
+    const result = favorites.filter((f) => f !== item);
+    setFavorites(result);
+  };
+
+  const handleSetPurchases = (item) => {
+    setPurchases([...purchases, item]);
+  };
+
+  const handleRemovePurchase = (item) => {
+    const result = purchases.filter((p) => p !== item);
+    setPurchases(result);
+  };
+
   return (
     <Item className="item">
-      <Grid item style={{paddingBottom:5, fontSize: '16px'}}>
+      <Grid item style={{ paddingBottom: 5, fontSize: "16px" }}>
         <span>{item.title}</span>
       </Grid>
 
@@ -40,7 +78,13 @@ export const GridItem = ({ item }) => {
         <Img src={item.img} />
       </div>
       <Grid item container>
-        <Grid item xs container direction="column" className="grid-container-info">
+        <Grid
+          item
+          xs
+          container
+          direction="column"
+          className="grid-container-info"
+        >
           <Grid item xs>
             <Typography gutterBottom variant="subtitle1" component="div">
               {item.name}
@@ -61,13 +105,31 @@ export const GridItem = ({ item }) => {
             {currencyFormat(item.price)}
           </Typography>
           <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
-            <Button className="grid-button">
-              <Tooltip title="В избранное">
+            <Button
+              className={isFavorite ? "grid-button-disabled" : "grid-button"}
+              disable={isFavorite}
+              onClick={
+                isFavorite
+                  ? () => handleRemoveFavorite(item.id)
+                  : () => handleSetFavorite(item.id)
+              }
+            >
+              <Tooltip
+                title={isFavorite ? "Remove from favorite" : "Add to favorite"}
+              >
                 <Favorite fontSize="medium" />
               </Tooltip>
             </Button>
-            <Button className="grid-button">
-              <Tooltip title="В корзину">
+            <Button
+              className={isAddToCart ? "grid-button-disabled" : "grid-button"}
+              disable={isAddToCart}
+              onClick={
+                isAddToCart
+                  ? () => handleRemovePurchase(item.id)
+                  : () => handleSetPurchases(item.id)
+              }
+            >
+              <Tooltip title={isAddToCart ? "Remove from cart" : "Add to cart"}>
                 <ShoppingCart />
               </Tooltip>
             </Button>
