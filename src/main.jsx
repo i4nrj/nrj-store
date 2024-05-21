@@ -6,10 +6,8 @@ import { ReactQueryDevtools } from "react-query/devtools";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <App />
-    </QueryClientProvider>
-
+  <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools initialIsOpen={false} />
+    <App />
+  </QueryClientProvider>
 );
