@@ -25,7 +25,7 @@ export const useGetDataGrid = () => {
       price: 23.45,
       width: "220",
       height: "500",
-      img: "/src/shared/images/night_light3.jpg",
+      img: "./src/shared/images/night_light3.jpg",
     },
     {
       id: 4,
